@@ -10,7 +10,6 @@ function Hero() {
   const handleVideoScrSet = () => {
     if (window.innerWidth < 760) {
       setVideoSrc(smallHeroVideo);
-      _;
     } else {
       setVideoSrc(heroVideo);
     }
@@ -25,7 +24,12 @@ function Hero() {
   useGSAP(() => {
     gsap.to("#hero", {
       opacity: 1,
-      delay: 1,
+      delay: 2,
+    });
+    gsap.to("#cta", {
+      opacity: 1,
+      delay: 2,
+      y: -50,
     });
   }, []);
   return (
@@ -45,6 +49,15 @@ function Hero() {
             <source src={videoSrc} type="video/mp4" />
           </video>
         </div>
+      </div>
+      <div
+        id="cta"
+        className="flex flex-col items-center opacity-0 translate-y-20"
+      >
+        <a href="#highlights" className="btn">
+          Buy
+        </a>
+        <p className="">From $199/Month or $999 </p>
       </div>
     </section>
   );
