@@ -2,12 +2,13 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { heroVideo, smallHeroVideo } from "../utils";
 import { useEffect, useState } from "react";
-function Hero() {
+
+const Hero = () => {
   const [videoSrc, setVideoSrc] = useState(
     window.innerWidth < 760 ? smallHeroVideo : heroVideo
   );
 
-  const handleVideoScrSet = () => {
+  const handleVideoSrcSet = () => {
     if (window.innerWidth < 760) {
       setVideoSrc(smallHeroVideo);
     } else {
@@ -16,31 +17,27 @@ function Hero() {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleVideoScrSet);
+    window.addEventListener("resize", handleVideoSrcSet);
+
     return () => {
-      window.removeEventListener("resize", handleVideoScrSet);
+      window.removeEventListener("reisze", handleVideoSrcSet);
     };
   }, []);
+
   useGSAP(() => {
-    gsap.to("#hero", {
-      opacity: 1,
-      delay: 2,
-    });
-    gsap.to("#cta", {
-      opacity: 1,
-      delay: 2,
-      y: -50,
-    });
+    gsap.to("#hero", { opacity: 1, delay: 2 });
+    gsap.to("#cta", { opacity: 1, y: -50, delay: 2 });
   }, []);
+
   return (
     <section className="w-full nav-height bg-black relative">
       <div className="h-5/6 w-full flex-center flex-col">
         <p id="hero" className="hero-title">
           iPhone 15 Pro
         </p>
-        <div className="mid:w-10/12 w-9/12">
+        <div className="md:w-10/12 w-9/12">
           <video
-            className="pointers-events-none"
+            className="pointer-events-none"
             autoPlay
             muted
             playsInline={true}
@@ -50,6 +47,7 @@ function Hero() {
           </video>
         </div>
       </div>
+
       <div
         id="cta"
         className="flex flex-col items-center opacity-0 translate-y-20"
@@ -57,10 +55,10 @@ function Hero() {
         <a href="#highlights" className="btn">
           Buy
         </a>
-        <p className="">From $199/Month or $999 </p>
+        <p className="font-normal text-xl">From $199/month or $999</p>
       </div>
     </section>
   );
-}
+};
 
 export default Hero;
